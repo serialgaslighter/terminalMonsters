@@ -28,3 +28,28 @@ class Stats {
     this.speed = speed;
   }
 }
+
+const charizard = new Pokemon("Charizard", ["Fire", "Flying"], new Stats(153, 104, 98, 129, 105, 120),
+  [
+    new Move("Flamethrower", "Fire", "Special", 90),
+    new Move("Air Slash", "Flying", "Special", 75),
+    new Move("Solarbeam", "Grass", "Special", 120),
+    new Move("Earth Power", "Ground", "Special", 90)
+  ]
+);
+// console.log(charizard);
+
+const scizor = new Pokemon("Scizor", ["Bug", "Steel"], new Stats(145, 150, 120, 75, 100, 85),
+  [
+    new Move("Bullet Punch", "Steel", "Physical", 40, 1),
+    new Move("X-Scissor", "Bug", "Physical", 80),
+    new Move("Iron Head", "Steel", "Physical", 80),
+    new Move("Dual Wingbeat", "Flying", "Physical", 80)
+  ]
+);
+// console.log(scizor);
+// const pikachu = new Pokemon("Pikachu", "Electric", [35, 55, 40, 50, 50, 90], ["Thundershock", "Tail Whip", "Tackle", "Thunderwave"]);
+// console.log(pikachu);
+// const raichu = new Pokemon("Raichu", "Electric", [60, 90, 55, 90, 80, 110], ["Thundershock", "Tail Whip", "Tackle", "Thunderwave"]);
+// console.log(raichu);
+// console.log(calcAttackDmg(charizard, scizor, 50));
