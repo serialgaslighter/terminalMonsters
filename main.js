@@ -1,3 +1,7 @@
+import readlineSync from "readline-sync";
+
+const rl = readlineSync.question;
+
 class Pokemon {
   constructor(name, type, stats, moves, level = 50) {
     this.name = name;
