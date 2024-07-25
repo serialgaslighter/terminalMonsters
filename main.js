@@ -17,3 +17,14 @@ class Move {
     this.priority = priority;
   }
 }
+
+class Stats {
+  constructor(hp, atk, def, spAtk, spDef, speed) {
+    this.hp = hp;
+    this.atk = atk;
+    this.def = def;
+    this.spAtk = spAtk;
+    this.spDef = spDef;
+    this.speed = speed;
+  }
+}
