@@ -53,3 +53,9 @@ const scizor = new Pokemon("Scizor", ["Bug", "Steel"], new Stats(145, 150, 120, 
 // const raichu = new Pokemon("Raichu", "Electric", [60, 90, 55, 90, 80, 110], ["Thundershock", "Tail Whip", "Tackle", "Thunderwave"]);
 // console.log(raichu);
 // console.log(calcAttackDmg(charizard, scizor, 50));
+const random = Math.random() * 0.15 + 0.85;
+//                        (22 * movePower * (atk/def)) / 50 + 2
+const damage = Math.floor((22 * 90 * (129 / 100)) / 50 + 2);
+// console.log(random);
+// console.log(Math.floor(damage * random));
+console.log(Math.round(damage * random));
