@@ -56,6 +56,15 @@ const scizor = new Pokemon("Scizor", ["Bug", "Steel"], new Stats(145, 150, 120, 
     new Move("Dual Wingbeat", "Flying", "Physical", 80)
   ]
 );
+
+const raichu = new Pokemon("Raichu", ["Electric"], new Stats(135, 110, 75, 110, 100, 130),
+  [
+    new Move("Thunderbolt", "Electric", "Special", 90),
+    new Move("Fake Out", "Normal", "Physical", 40, 2),
+    new Move("Iron Tail", "Steel", "Physical", 100),
+    new Move("Quick Attack", "Normal", "Physical", 40, 1)
+  ]
+);
 // console.log(scizor);
 // const pikachu = new Pokemon("Pikachu", "Electric", [35, 55, 40, 50, 50, 90], ["Thundershock", "Tail Whip", "Tackle", "Thunderwave"]);
 // console.log(pikachu);
@@ -68,5 +77,5 @@ const damage = Math.floor((22 * 90 * (129 / 100)) / 50 + 2);
 // console.log(random);
 // console.log(Math.floor(damage * random));
 console.log(Math.round(damage * random));
-console.log(Pokemon.pokedex);
-// console.log(Pokemon.getAllPokemon());
+// console.log(Pokemon.pokedex);
+console.log(Pokemon.getAllPokemon());
