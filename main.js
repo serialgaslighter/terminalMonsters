@@ -3,12 +3,17 @@ import readlineSync from "readline-sync";
 const rl = readlineSync.question;
 
 class Pokemon {
+  static pokedex = [];
   constructor(name, type, stats, moves, level = 50) {
     this.name = name;
     this.type = type;
     this.stats = stats;
     this.moves = moves;
     this.level = level;
+    Pokemon.pokedex.push(this);
+  }
+  static getAllPokemon() {
+    return Pokemon.pokedex;
   }
 }
 
@@ -63,3 +68,5 @@ const damage = Math.floor((22 * 90 * (129 / 100)) / 50 + 2);
 // console.log(random);
 // console.log(Math.floor(damage * random));
 console.log(Math.round(damage * random));
+console.log(Pokemon.pokedex);
+// console.log(Pokemon.getAllPokemon());
