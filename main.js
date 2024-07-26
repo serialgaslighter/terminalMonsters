@@ -2,6 +2,7 @@ import readlineSync from "readline-sync";
 
 const rl = readlineSync.question;
 
+// CLASSES
 class Pokemon {
   static pokedex = [];
   constructor(name, type, stats, moves, level = 50) {
@@ -37,7 +38,7 @@ class Stats {
     this.speed = speed;
   }
 }
-
+// POKEMON
 const charizard = new Pokemon("Charizard", ["Fire", "Flying"], new Stats(153, 104, 98, 129, 105, 120),
   [
     new Move("Flamethrower", "Fire", "Special", 90),
@@ -46,7 +47,6 @@ const charizard = new Pokemon("Charizard", ["Fire", "Flying"], new Stats(153, 10
     new Move("Earth Power", "Ground", "Special", 90)
   ]
 );
-// console.log(charizard);
 
 const scizor = new Pokemon("Scizor", ["Bug", "Steel"], new Stats(145, 150, 120, 75, 100, 85),
   [
@@ -65,12 +65,17 @@ const raichu = new Pokemon("Raichu", ["Electric"], new Stats(135, 110, 75, 110, 
     new Move("Quick Attack", "Normal", "Physical", 40, 1)
   ]
 );
-// console.log(scizor);
-// const pikachu = new Pokemon("Pikachu", "Electric", [35, 55, 40, 50, 50, 90], ["Thundershock", "Tail Whip", "Tackle", "Thunderwave"]);
-// console.log(pikachu);
-// const raichu = new Pokemon("Raichu", "Electric", [60, 90, 55, 90, 80, 110], ["Thundershock", "Tail Whip", "Tackle", "Thunderwave"]);
-// console.log(raichu);
-// console.log(calcAttackDmg(charizard, scizor, 50));
+
+const mewtwo = new Pokemon("Mewtwo", ["Psychic"], new Stats(181, 130, 110, 174, 110, 150),
+  [
+    new Move("Psychic", "Psychic", "Special", 90),
+    new Move("Aura Sphere", "Fighting", "Special", 80),
+    new Move("Energy Ball", "Grass", "Special", 90),
+    new Move("Ice Beam", "Ice", "Special", 90)
+  ]
+);
+
+
 const random = Math.random() * 0.15 + 0.85;
 //                        (22 * movePower * (atk/def)) / 50 + 2
 const damage = Math.floor((22 * 90 * (129 / 100)) / 50 + 2);
