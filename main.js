@@ -75,6 +75,15 @@ const mewtwo = new Pokemon("Mewtwo", ["Psychic"], new Stats(181, 130, 110, 174, 
   ]
 );
 
+const articuno = new Pokemon("Articuno", ["Flying", "Ice"], new Stats(165, 105, 120, 115, 145, 105),
+  [
+    new Move("Blizzard", "Ice", "Special", 110),
+    new Move("Air Slash", "Flying", "Special", 75),
+    new Move("Tailwind", "Flying", "Neutral", 0),
+    new Move("Freeze-Dry", "Ice", "Special", 70)
+  ]
+);
+
 
 const random = Math.random() * 0.15 + 0.85;
 //                        (22 * movePower * (atk/def)) / 50 + 2
