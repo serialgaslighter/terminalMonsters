@@ -1,12 +1,13 @@
-export function randomTeamGenerator(pokedex) {
+export function randomTeamGenerator(pokedex, teamType) {
+  const team = [];
   
-  const myTeam = [];
-  while (myTeam.length < 2) {
+  while (team.length < 2) {
     const randomIndex = Math.floor(Math.random() * pokedex.length);
 
-    if (!myTeam.includes(pokedex[randomIndex])) {
-      myTeam.push(pokedex[randomIndex])
+    if (!team.includes(pokedex[randomIndex])) {
+      team.push(pokedex[randomIndex]);
     }
   }
-  return myTeam;
+  
+  return team;
 }
