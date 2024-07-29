@@ -15,20 +15,8 @@ const damage = Math.floor((22 * 90 * (129 / 100)) / 50 + 2);
 
 // LOGIC
 // Get a random Team of 2 Pokemon
-function randomTeamGenerator(pokedex) {
-  
-  const myTeam = [];
-  while (myTeam.length < 2) {
-    const randomIndex = Math.floor(Math.random() * pokedex.length);
-
-    if (!myTeam.includes(pokedex[randomIndex])) {
-      myTeam.push(pokedex[randomIndex])
-    }
-  }
-  return myTeam;
-}
 // console.log(randomTeamGenerator(Pokemon.pokedex));
-const myTeam = randomTeamGenerator(Everything.Pokemon.pokedex);
+const myTeam = Everything.randomTeamGenerator(Everything.Pokemon.pokedex);
 
 // Extrahiere die Namen der Pokémon
 const pokemonNames = myTeam.map(pokemon => pokemon.name);
