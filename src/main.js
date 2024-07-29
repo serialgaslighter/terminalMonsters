@@ -10,12 +10,10 @@ const damage = Math.floor((22 * 90 * (129 / 100)) / 50 + 2);
 // console.log(random);
 // console.log(Math.floor(damage * random));
 // console.log(Math.round(damage * random));
-// console.log(Pokemon.pokedex);
 // console.log(Pokemon.getAllPokemon());
 
 // LOGIC
 // Get a random Team of 2 Pokemon
-// console.log(randomTeamGenerator(Pokemon.pokedex));
 const myTeam = Everything.randomTeamGenerator(Everything.Pokemon.pokedex);
 
 // Extrahiere die Namen der Pokémon
