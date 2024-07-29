@@ -1,4 +1,4 @@
-export function randomTeamGenerator(pokedex, teamType) {
+export function randomTeamGenerator(pokedex) {
   const team = [];
   
   while (team.length < 2) {
@@ -8,6 +8,5 @@ export function randomTeamGenerator(pokedex, teamType) {
       team.push(pokedex[randomIndex]);
     }
   }
-  
   return team;
 }
