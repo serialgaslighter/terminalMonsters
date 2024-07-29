@@ -3,8 +3,6 @@ import * as Everything from "./index.js";
 
 const rl = readlineSync.question;
 
-// console.log(Pokemon.getAllPokemon());
-
 // Get a random Team of 2 Pokemon
 const myTeam = Everything.randomTeamGenerator(Everything.Pokemon.pokedex);
 const enemyTeam = Everything.randomTeamGenerator(Everything.Pokemon.pokedex);
