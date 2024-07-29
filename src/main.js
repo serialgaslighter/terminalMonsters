@@ -15,9 +15,7 @@ const enemyPokemonNames = enemyTeam.map(pokemon => pokemon.name);
 
 // Zeige die Namen in der Konsole an
 console.clear();
-console.log(`Your Team is: ${pokemonNames.join(", ")}`);
- // Import the entire module
-
-Everything.spinner(enemyPokemonNames);
+// cli-spinners
+Everything.spinner(pokemonNames, enemyPokemonNames);
 
 // console.log(`The Enemy is: ${enemyPokemonNames.join(", ")}`);
