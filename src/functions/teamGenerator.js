@@ -10,3 +10,7 @@ export function randomTeamGenerator(pokedex) {
   }
   return team;
 }
+
+export function startBattle(team) {
+  return team[0];
+}
