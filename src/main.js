@@ -1,7 +1,4 @@
-import readlineSync from "readline-sync";
 import * as Everything from "./index.js";
-
-const rl = readlineSync.question;
 
 // Get a random Team of 2 Pokemon
 const myTeam = Everything.randomTeamGenerator(Everything.Pokemon.pokedex);
@@ -20,3 +17,5 @@ console.log(`Enemy team: ${enemyPokemonNames.join(", ")}`);
 
 console.log(`Let's go ${Everything.startBattle(pokemonNames)}!`);
 console.log(`Your Opponent send out ${Everything.startBattle(enemyPokemonNames)}.`);
+
+Everything.menuSelection(myTeam);
