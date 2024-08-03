@@ -18,4 +18,4 @@ console.log(`Enemy team: ${enemyPokemonNames.join(", ")}`);
 console.log(`Let's go ${Everything.startBattle(pokemonNames)}!`);
 console.log(`Your Opponent send out ${Everything.startBattle(enemyPokemonNames)}.`);
 
-Everything.menuSelection(myTeam);
+Everything.menuSelection(myTeam, enemyTeam);

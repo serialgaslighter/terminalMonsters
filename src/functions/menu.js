@@ -1,6 +1,8 @@
 import readlineSync from "readline-sync";
+import { damageCalc } from "./math.js";
+import { typeEffectiveness } from "../pokemon/types.js";
 
-export function menuSelection(team) {
+export function menuSelection(team, enemy) {
   
   
   while (team.length > 0) {
@@ -18,7 +20,11 @@ export function menuSelection(team) {
         chooseAttack === "4"
       ) {
         console.clear();
-        console.log(`${team[0].name} uses ${team[0].moves[Number(chooseAttack - 1)].name}.`); 
+        console.log(`${team[0].name} uses ${team[0].moves[Number(chooseAttack - 1)].name}.`);
+        const moveIndex = Number(chooseAttack) - 1;
+        const move = team[0].moves[moveIndex];
+        const damage = damageCalc(team, enemy, move, typeEffectiveness);
+        console.log(damage);
       }
       
     }

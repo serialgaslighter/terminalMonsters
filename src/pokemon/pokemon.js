@@ -18,31 +18,31 @@ const scizor = new Pokemon("Scizor", ["Bug", "Steel"], new Stats(145, 150, 120, 
   ]
 );
 
-const raichu = new Pokemon("Raichu", ["Electric"], new Stats(135, 110, 75, 110, 100, 130),
-  [
-    new Move("Thunderbolt", "Electric", "Special", 90),
-    new Move("Fake Out", "Normal", "Physical", 40, 2),
-    new Move("Iron Tail", "Steel", "Physical", 100),
-    new Move("Quick Attack", "Normal", "Physical", 40, 1)
-  ]
-);
+// const raichu = new Pokemon("Raichu", ["Electric"], new Stats(135, 110, 75, 110, 100, 130),
+//   [
+//     new Move("Thunderbolt", "Electric", "Special", 90),
+//     new Move("Fake Out", "Normal", "Physical", 40, 2),
+//     new Move("Iron Tail", "Steel", "Physical", 100),
+//     new Move("Quick Attack", "Normal", "Physical", 40, 1)
+//   ]
+// );
 
-const mewtwo = new Pokemon("Mewtwo", ["Psychic"], new Stats(181, 130, 110, 174, 110, 150),
-  [
-    new Move("Psychic", "Psychic", "Special", 90),
-    new Move("Aura Sphere", "Fighting", "Special", 80),
-    new Move("Energy Ball", "Grass", "Special", 90),
-    new Move("Ice Beam", "Ice", "Special", 90)
-  ]
-);
+// const mewtwo = new Pokemon("Mewtwo", ["Psychic"], new Stats(181, 130, 110, 174, 110, 150),
+//   [
+//     new Move("Psychic", "Psychic", "Special", 90),
+//     new Move("Aura Sphere", "Fighting", "Special", 80),
+//     new Move("Energy Ball", "Grass", "Special", 90),
+//     new Move("Ice Beam", "Ice", "Special", 90)
+//   ]
+// );
 
-const articuno = new Pokemon("Articuno", ["Flying", "Ice"], new Stats(165, 105, 120, 115, 145, 105),
-  [
-    new Move("Blizzard", "Ice", "Special", 110),
-    new Move("Air Slash", "Flying", "Special", 75),
-    new Move("Tailwind", "Flying", "Neutral", 0),
-    new Move("Freeze-Dry", "Ice", "Special", 70)
-  ]
-);
+// const articuno = new Pokemon("Articuno", ["Flying", "Ice"], new Stats(165, 105, 120, 115, 145, 105),
+//   [
+//     new Move("Blizzard", "Ice", "Special", 110),
+//     new Move("Air Slash", "Flying", "Special", 75),
+//     new Move("Tailwind", "Flying", "Neutral", 0),
+//     new Move("Freeze-Dry", "Ice", "Special", 70)
+//   ]
+// );
 
-export { charizard, scizor, raichu, mewtwo, articuno };
+export { charizard, scizor };
