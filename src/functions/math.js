@@ -1,21 +1,419 @@
+export function pokeRound(number) {
+  return number % 1 > 0.5 ? Math.ceil(number) : Math.floor(number);
+}
 
-                       // (22 * movePower * (atk/def)) / 50 + 2
+export function OF16(n) {
+  console.log(n);
+  return n > 65535 ? n % 65536 : n;
+}
 
+export function OF32(n) {
+  console.log(n);
+  return n > 4294967295 ? n % 4294967296 : n;
+}
 
-export function damageCalc(yourPokemon, enemyPokemon, move, typeEffectiveness) {
-  const random = Math.random() * 0.15 + 0.85;
-  let effectiveness = 1;
-  enemyPokemon[0].type.forEach(enemyType => {
-    effectiveness *= typeEffectiveness[move.type][enemyType] || 1;
-  });
+export function getBaseDamage(level, basePower, attack, defense) {
+  return Math.floor(
+    OF32(
+      Math.floor(
+        OF32(OF32(Math.floor((2 * level) / 5 + 2) * basePower) * attack) / defense
+      ) / 50 + 2
+    )
+  );
+}
+// console.log("the basedmg is:");
+// console.log(getBaseDamage(50, 90, 129, 105));
 
-  console.log("Effectiveness multiplier:", effectiveness);
+export function getFinalDamage(
+  baseAmount,
+  i,
+  effectiveness,
+  isBurned,
+  stabMod,
+  finalMod,
+  protect
+) {
+  let damageAmount = Math.floor(OF32(baseAmount * (85 + i)) / 100);
+  // If the stabMod would not accomplish anything we avoid applying it because it could cause
+  // us to calculate damage overflow incorrectly (DaWoblefet)
+  if (stabMod !== 4096) damageAmount = OF32(damageAmount * stabMod) / 4096;
+  damageAmount = Math.floor(OF32(pokeRound(damageAmount) * effectiveness));
+  console.log(`hier: ${damageAmount}`);
+
+  if (isBurned) damageAmount = Math.floor(damageAmount / 2);
+  if (protect) damageAmount = pokeRound(OF32(damageAmount * 1024) / 4096);
+  return OF16(pokeRound(Math.max(1, OF32(damageAmount * finalMod) / 4096)));
+}
+
+// console.log(getFinalDamage(50, 3, 0.5, false, 6144, 4096, false));
+
+export function calculateTypeEffectiveness(moveType, targetTypes) {
+  const typeChart = {
+    Bug: {
+      Bug: 1,
+      Dark: 2,
+      Dragon: 1,
+      Electric: 1,
+      Fairy: 0.5,
+      Fighting: 0.5,
+      Fire: 0.5,
+      Flying: 0.5,
+      Ghost: 0.5,
+      Grass: 2,
+      Ground: 1,
+      Ice: 1,
+      Normal: 1,
+      Poison: 0.5,
+      Psychic: 2,
+      Rock: 1,
+      Steel: 0.5,
+      Water: 1,
+    },
+    Dark: {
+      Bug: 1,
+      Dark: 0.5,
+      Dragon: 1,
+      Electric: 1,
+      Fairy: 0.5,
+      Fighting: 0.5,
+      Fire: 1,
+      Flying: 1,
+      Ghost: 2,
+      Grass: 1,
+      Ground: 1,
+      Ice: 1,
+      Normal: 1,
+      Poison: 1,
+      Psychic: 2,
+      Rock: 1,
+      Steel: 1,
+      Water: 1,
+    },
+    Dragon: {
+      Bug: 1,
+      Dark: 1,
+      Dragon: 2,
+      Electric: 1,
+      Fairy: 0,
+      Fighting: 1,
+      Fire: 1,
+      Flying: 1,
+      Ghost: 1,
+      Grass: 1,
+      Ground: 1,
+      Ice: 1,
+      Normal: 1,
+      Poison: 1,
+      Psychic: 1,
+      Rock: 1,
+      Steel: 0.5,
+      Water: 1,
+    },
+    Electric: {
+      Bug: 1,
+      Dark: 1,
+      Dragon: 0.5,
+      Electric: 0.5,
+      Fairy: 1,
+      Fighting: 1,
+      Fire: 1,
+      Flying: 2,
+      Ghost: 1,
+      Grass: 0.5,
+      Ground: 0,
+      Ice: 1,
+      Normal: 1,
+      Poison: 1,
+      Psychic: 1,
+      Rock: 1,
+      Steel: 1,
+      Water: 2,
+    },
+    Fairy: {
+      Bug: 1,
+      Dark: 2,
+      Dragon: 2,
+      Electric: 1,
+      Fairy: 1,
+      Fighting: 2,
+      Fire: 0.5,
+      Flying: 1,
+      Ghost: 1,
+      Grass: 1,
+      Ground: 1,
+      Ice: 1,
+      Normal: 1,
+      Poison: 0.5,
+      Psychic: 1,
+      Rock: 1,
+      Steel: 0.5,
+      Water: 1,
+    },
+    Fighting: {
+      Bug: 0.5,
+      Dark: 2,
+      Dragon: 1,
+      Electric: 1,
+      Fairy: 0.5,
+      Fighting: 1,
+      Fire: 1,
+      Flying: 0.5,
+      Ghost: 0,
+      Grass: 1,
+      Ground: 1,
+      Ice: 2,
+      Normal: 2,
+      Poison: 0.5,
+      Psychic: 0.5,
+      Rock: 2,
+      Steel: 2,
+      Water: 1,
+    },
+    Fire: {
+      Bug: 2,
+      Dark: 1,
+      Dragon: 0.5,
+      Electric: 1,
+      Fairy: 1,
+      Fighting: 1,
+      Fire: 0.5,
+      Flying: 1,
+      Ghost: 1,
+      Grass: 2,
+      Ground: 1,
+      Ice: 2,
+      Normal: 1,
+      Poison: 1,
+      Psychic: 1,
+      Rock: 0.5,
+      Steel: 2,
+      Water: 0.5,
+    },
+    Flying: {
+      Bug: 2,
+      Dark: 1,
+      Dragon: 1,
+      Electric: 0.5,
+      Fairy: 1,
+      Fighting: 2,
+      Fire: 1,
+      Flying: 1,
+      Ghost: 1,
+      Grass: 2,
+      Ground: 1,
+      Ice: 1,
+      Normal: 1,
+      Poison: 1,
+      Psychic: 1,
+      Rock: 0.5,
+      Steel: 0.5,
+      Water: 1,
+    },
+    Ghost: {
+      Bug: 1,
+      Dark: 0.5,
+      Dragon: 1,
+      Electric: 1,
+      Fairy: 1,
+      Fighting: 1,
+      Fire: 1,
+      Flying: 1,
+      Ghost: 2,
+      Grass: 1,
+      Ground: 1,
+      Ice: 1,
+      Normal: 0,
+      Poison: 1,
+      Psychic: 2,
+      Rock: 1,
+      Steel: 1,
+      Water: 1,
+    },
+    Grass: {
+      Bug: 0.5,
+      Dark: 1,
+      Dragon: 0.5,
+      Electric: 1,
+      Fairy: 1,
+      Fighting: 1,
+      Fire: 0.5,
+      Flying: 0.5,
+      Ghost: 1,
+      Grass: 0.5,
+      Ground: 2,
+      Ice: 1,
+      Normal: 1,
+      Poison: 0.5,
+      Psychic: 1,
+      Rock: 2,
+      Steel: 0.5,
+      Water: 2,
+    },
+    Ground: {
+      Bug: 0.5,
+      Dark: 1,
+      Dragon: 1,
+      Electric: 2,
+      Fairy: 1,
+      Fighting: 1,
+      Fire: 2,
+      Flying: 0,
+      Ghost: 1,
+      Grass: 0.5,
+      Ground: 1,
+      Ice: 1,
+      Normal: 1,
+      Poison: 2,
+      Psychic: 1,
+      Rock: 2,
+      Steel: 2,
+      Water: 1,
+    },
+    Ice: {
+      Bug: 1,
+      Dark: 1,
+      Dragon: 2,
+      Electric: 1,
+      Fairy: 1,
+      Fighting: 1,
+      Fire: 0.5,
+      Flying: 2,
+      Ghost: 1,
+      Grass: 2,
+      Ground: 2,
+      Ice: 0.5,
+      Normal: 1,
+      Poison: 1,
+      Psychic: 1,
+      Rock: 1,
+      Steel: 0.5,
+      Water: 0.5,
+    },
+    Normal: {
+      Bug: 1,
+      Dark: 1,
+      Dragon: 1,
+      Electric: 1,
+      Fairy: 1,
+      Fighting: 1,
+      Fire: 1,
+      Flying: 1,
+      Ghost: 0,
+      Grass: 1,
+      Ground: 1,
+      Ice: 1,
+      Normal: 1,
+      Poison: 1,
+      Psychic: 1,
+      Rock: 0.5,
+      Steel: 0.5,
+      Water: 1,
+    },
+    Poison: {
+      Bug: 1,
+      Dark: 1,
+      Dragon: 1,
+      Electric: 1,
+      Fairy: 2,
+      Fighting: 1,
+      Fire: 1,
+      Flying: 1,
+      Ghost: 0.5,
+      Grass: 2,
+      Ground: 0.5,
+      Ice: 1,
+      Normal: 1,
+      Poison: 0.5,
+      Psychic: 1,
+      Rock: 0.5,
+      Steel: 0,
+      Water: 1,
+    },
+    Psychic: {
+      Bug: 1,
+      Dark: 0,
+      Dragon: 1,
+      Electric: 1,
+      Fairy: 1,
+      Fighting: 2,
+      Fire: 1,
+      Flying: 1,
+      Ghost: 1,
+      Grass: 1,
+      Ground: 1,
+      Ice: 1,
+      Normal: 1,
+      Poison: 2,
+      Psychic: 0.5,
+      Rock: 1,
+      Steel: 0.5,
+      Water: 1,
+    },
+    Rock: {
+      Bug: 2,
+      Dark: 1,
+      Dragon: 1,
+      Electric: 1,
+      Fairy: 1,
+      Fighting: 0.5,
+      Fire: 2,
+      Flying: 2,
+      Ghost: 1,
+      Grass: 1,
+      Ground: 0.5,
+      Ice: 2,
+      Normal: 1,
+      Poison: 1,
+      Psychic: 1,
+      Rock: 1,
+      Steel: 0.5,
+      Water: 1,
+    },
+    Steel: {
+      Bug: 1,
+      Dark: 1,
+      Dragon: 1,
+      Electric: 0.5,
+      Fairy: 2,
+      Fighting: 1,
+      Fire: 0.5,
+      Flying: 1,
+      Ghost: 1,
+      Grass: 1,
+      Ground: 1,
+      Ice: 2,
+      Normal: 1,
+      Poison: 1,
+      Psychic: 1,
+      Rock: 2,
+      Steel: 0.5,
+      Water: 0.5,
+    },
+    Water: {
+      Bug: 1,
+      Dark: 1,
+      Dragon: 0.5,
+      Electric: 1,
+      Fairy: 1,
+      Fighting: 1,
+      Fire: 2,
+      Flying: 1,
+      Ghost: 1,
+      Grass: 0.5,
+      Ground: 2,
+      Ice: 1,
+      Normal: 1,
+      Poison: 1,
+      Psychic: 1,
+      Rock: 2,
+      Steel: 1,
+      Water: 0.5,
+    },
+  };
   
-  if (yourPokemon[0].type.includes(move.type) && move.style === "Physical") {
-    const damage = Math.floor((22 * (move.power * 1.5) * (yourPokemon[0].stats.atk / enemyPokemon[0].stats.def)) / 50 + 2);
-    const randomDamageRange = damage * random;
-    return randomDamageRange * effectiveness;
-  }
-
-  return 0;
+  let effectiveness = 1;
+  targetTypes.forEach(type => {
+    effectiveness *= typeChart[moveType][type] || 1;
+  });
+  return effectiveness;
 }

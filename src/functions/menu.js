@@ -1,5 +1,5 @@
 import readlineSync from "readline-sync";
-import { damageCalc } from "./math.js";
+import { getFinalDamage, calculateTypeEffectiveness } from "./math.js";
 import { typeEffectiveness } from "../pokemon/types.js";
 
 export function menuSelection(team, enemy) {
@@ -21,10 +21,15 @@ export function menuSelection(team, enemy) {
       ) {
         console.clear();
         console.log(`${team[0].name} uses ${team[0].moves[Number(chooseAttack - 1)].name}.`);
+        const array0to15 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+        const randomIndex = Math.floor(Math.random() * array0to15.length);
+        const randomDamageMultiplier = array0to15[randomIndex];
+        console.log(randomDamageMultiplier);
         const moveIndex = Number(chooseAttack) - 1;
         const move = team[0].moves[moveIndex];
-        const damage = damageCalc(team, enemy, move, typeEffectiveness);
-        console.log(damage);
+        const effectiveness = calculateTypeEffectiveness(move.type, enemy[0].type);
+        let damage = [];
+        console.log(getFinalDamage(50, 15, effectiveness, false, 6144, 4096, false));
       }
       
     }
