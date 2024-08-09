@@ -26,7 +26,7 @@ export function menuSelection(team, enemy) {
         const randomDamageMultiplier = array0to15[randomIndex];
         const moveIndex = Number(chooseAttack) - 1;
         const move = team[0].moves[moveIndex];
-        const effectiveness = calculateTypeEffectiveness(move.type, enemy[0].type);
+        const effectiveness = calculateTypeEffectiveness(typeEffectiveness, move.type, enemy[0].type);
         console.log(getFinalDamage(50, randomDamageMultiplier, effectiveness, false, 6144, 4096, false));
       }
       
