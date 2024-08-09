@@ -1,14 +1,12 @@
-export function pokeRound(number) {
-  return number % 1 > 0.5 ? Math.ceil(number) : Math.floor(number);
+export function pokeRound(n) {
+  return n % 1 > 0.5 ? Math.ceil(n) : Math.floor(n);
 }
 
 export function OF16(n) {
-  console.log(n);
   return n > 65535 ? n % 65536 : n;
 }
 
 export function OF32(n) {
-  console.log(n);
   return n > 4294967295 ? n % 4294967296 : n;
 }
 
@@ -21,8 +19,6 @@ export function getBaseDamage(level, basePower, attack, defense) {
     )
   );
 }
-// console.log("the basedmg is:");
-// console.log(getBaseDamage(50, 90, 129, 105));
 
 export function getFinalDamage(
   baseAmount,
@@ -38,14 +34,11 @@ export function getFinalDamage(
   // us to calculate damage overflow incorrectly (DaWoblefet)
   if (stabMod !== 4096) damageAmount = OF32(damageAmount * stabMod) / 4096;
   damageAmount = Math.floor(OF32(pokeRound(damageAmount) * effectiveness));
-  console.log(`hier: ${damageAmount}`);
 
   if (isBurned) damageAmount = Math.floor(damageAmount / 2);
   if (protect) damageAmount = pokeRound(OF32(damageAmount * 1024) / 4096);
   return OF16(pokeRound(Math.max(1, OF32(damageAmount * finalMod) / 4096)));
 }
-
-// console.log(getFinalDamage(50, 3, 0.5, false, 6144, 4096, false));
 
 export function calculateTypeEffectiveness(moveType, targetTypes) {
   const typeChart = {

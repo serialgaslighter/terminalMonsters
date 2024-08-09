@@ -24,12 +24,10 @@ export function menuSelection(team, enemy) {
         const array0to15 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
         const randomIndex = Math.floor(Math.random() * array0to15.length);
         const randomDamageMultiplier = array0to15[randomIndex];
-        console.log(randomDamageMultiplier);
         const moveIndex = Number(chooseAttack) - 1;
         const move = team[0].moves[moveIndex];
         const effectiveness = calculateTypeEffectiveness(move.type, enemy[0].type);
-        let damage = [];
-        console.log(getFinalDamage(50, 15, effectiveness, false, 6144, 4096, false));
+        console.log(getFinalDamage(50, randomDamageMultiplier, effectiveness, false, 6144, 4096, false));
       }
       
     }
