@@ -33,6 +33,11 @@ export function menuSelection(team, enemy) {
           console.log("It's not very effective.");
         }
         console.log(getFinalDamage(50, randomDamageMultiplier, effectiveness, false, 6144, 4096, false));
+        team[0].stats.hp -= getFinalDamage(50, randomDamageMultiplier, effectiveness, false, 6144, 4096, false);
+        console.log(team[0].stats.hp);
+      }
+      if (chooseAttack === "0") {
+        console.clear();
       }
       
     }
