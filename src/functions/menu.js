@@ -27,6 +27,11 @@ export function menuSelection(team, enemy) {
         const moveIndex = Number(chooseAttack) - 1;
         const move = team[0].moves[moveIndex];
         const effectiveness = calculateTypeEffectiveness(typeEffectiveness, move.type, enemy[0].type);
+        if (effectiveness > 1) {
+          console.log("It's super effective!");
+        } else if (effectiveness < 1) {
+          console.log("It's not very effective.");
+        }
         console.log(getFinalDamage(50, randomDamageMultiplier, effectiveness, false, 6144, 4096, false));
       }
       
