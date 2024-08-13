@@ -18,6 +18,7 @@ const scizor = new Pokemon("Scizor", ["Bug", "Steel"], new Stats(145, 150, 120, 
   ]
 );
 
+
 // const raichu = new Pokemon("Raichu", ["Electric"], new Stats(135, 110, 75, 110, 100, 130),
 //   [
 //     new Move("Thunderbolt", "Electric", "Special", 90),

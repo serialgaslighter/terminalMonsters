@@ -1,5 +1,5 @@
 import readlineSync from "readline-sync";
-import { getFinalDamage, calculateTypeEffectiveness } from "./math.js";
+import { getFinalDamage, calculateTypeEffectiveness, getBaseDamage } from "./math.js";
 import { healthBar } from "./healthBar.js";
 import { typeEffectiveness } from "../pokemon/types.js";
 
@@ -13,8 +13,6 @@ export function menuSelection(team, enemy) {
     if (select === "1") {
       console.clear();
 
-      
-      
       const chooseAttack = readlineSync.question(`[1] ${team[0].moves[0].name}\n[2] ${team[0].moves[1].name}\n[3] ${team[0].moves[2].name}\n[4] ${team[0].moves[3].name}\n[0] Back `)
 
       if (
@@ -36,7 +34,20 @@ export function menuSelection(team, enemy) {
         } else if (effectiveness < 1) {
           console.log("It's not very effective.");
         }
-        console.log(getFinalDamage(50, randomDamageMultiplier, effectiveness, false, 6144, 4096, false));
+        const moveStyle = move.style;
+        let attackStat;
+        let defenseStat;
+        if (move.style === "Physical") {
+          attackStat = team[0].stats.atk;
+          defenseStat = enemy[0].stats.def
+        } else {
+          attackStat = team[0].stats.spAtk;
+          defenseStat = enemy[0].stats.spDef;
+        }
+        console.log(`attackStat ${attackStat}`);
+        console.log(`defenseStat ${defenseStat}`);
+        const baseDamage = getBaseDamage(team[0].level, move.power, attackStat, defenseStat)
+        console.log(getFinalDamage(baseDamage, randomDamageMultiplier, effectiveness, false, 6144, 4096, false));
         enemy[0].stats.hp -= getFinalDamage(50, randomDamageMultiplier, effectiveness, false, 6144, 4096, false);
         console.log(enemy[0].stats.hp);
         healthBar(enemy[0].stats.hp, enemy[0].stats.maxHp);
