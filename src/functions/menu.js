@@ -2,6 +2,7 @@ import readlineSync from "readline-sync";
 import { getFinalDamage, calculateTypeEffectiveness, getBaseDamage } from "./math.js";
 import { healthBar } from "./healthBar.js";
 import { typeEffectiveness } from "../pokemon/types.js";
+import { enemyChooseAttack } from "./enemyAi.js";
 
 export function menuSelection(team, enemy) {
   healthBar(team[0].stats.hp, team[0].stats.maxHp);
@@ -51,6 +52,7 @@ export function menuSelection(team, enemy) {
         enemy[0].stats.hp -= getFinalDamage(50, randomDamageMultiplier, effectiveness, false, 6144, 4096, false);
         console.log(enemy[0].stats.hp);
         healthBar(enemy[0].stats.hp, enemy[0].stats.maxHp);
+        enemyChooseAttack(team, enemy);
       }
       if (chooseAttack === "0") {
         console.clear();
