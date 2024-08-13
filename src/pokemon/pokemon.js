@@ -44,5 +44,5 @@ const scizor = new Pokemon("Scizor", ["Bug", "Steel"], new Stats(145, 150, 120, 
 //     new Move("Freeze-Dry", "Ice", "Special", 70)
 //   ]
 // );
-
+console.log(charizard);
 export { charizard, scizor };

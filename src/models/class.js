@@ -26,6 +26,7 @@ export class Move {
 export class Stats {
   constructor(hp, atk, def, spAtk, spDef, speed) {
     this.hp = hp;
+    this.maxHp = hp;
     this.atk = atk;
     this.def = def;
     this.spAtk = spAtk;
