@@ -43,7 +43,7 @@ export function getFinalDamage(
 export function calculateTypeEffectiveness(types, moveType, targetTypes) {
   let effectiveness = 1;
   targetTypes.forEach(type => {
-    effectiveness *= types[moveType][type] || 1;
+    effectiveness *= types[moveType][type];
   });
   return effectiveness;
 }

@@ -47,12 +47,22 @@ export function menuSelection(team, enemy) {
         }
         console.log(`attackStat ${attackStat}`);
         console.log(`defenseStat ${defenseStat}`);
+        // function getBaseDamageA(teamPosition) {
+        //   const level = team[teamPosition].level
+        //   getBaseDamage(level, move.power, attackStat, defenseStat)
+        // }
+        // getBaseDamageA(0)
         const baseDamage = getBaseDamage(team[0].level, move.power, attackStat, defenseStat)
-        console.log(getFinalDamage(baseDamage, randomDamageMultiplier, effectiveness, false, 6144, 4096, false));
-        enemy[0].stats.hp -= getFinalDamage(50, randomDamageMultiplier, effectiveness, false, 6144, 4096, false);
+        let finalDamage = getFinalDamage(baseDamage, randomDamageMultiplier, effectiveness, false, 6144, 4096, false)
+        if (effectiveness === 0) {
+          finalDamage = 0;
+        }
+        console.log(finalDamage);
+        enemy[0].stats.hp -= finalDamage;
         console.log(enemy[0].stats.hp);
         healthBar(enemy[0].stats.hp, enemy[0].stats.maxHp);
-        enemyChooseAttack(team, enemy);
+        const enemyDamage = enemyChooseAttack(team, enemy);
+        console.log(`The enemy's ${enemy[0].name} used ${enemyDamage.move.name}. It dealt ${enemyDamage.damage} damage.`);
       }
       if (chooseAttack === "0") {
         console.clear();
